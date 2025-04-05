@@ -5,6 +5,7 @@
 **Thesis Advisor:** [Asst. Prof. Alvin J. K. CHUA]  
 
 ---
+# Overview
 
 This repository contains the code developed to validate and run experiments on the models presented in my thesis, 
 “[DEEP LEARNING FOR BAYESIAN POSTERIOR SAMPLING IN GRAVITATIONAL-WAVE ASTRONOMY].” 
