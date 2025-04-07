@@ -56,4 +56,4 @@ def kl_div(hist_0, x_edges, y_edges, sample, burnin):
     prob_0_flat += epsilon
 
     # Calculate KL divergence (1st argument is P, 2nd argument is Q)
-    return entropy(prob_A_flat, prob_0_flat)
+    return entropy(prob_0_flat, prob_A_flat)
