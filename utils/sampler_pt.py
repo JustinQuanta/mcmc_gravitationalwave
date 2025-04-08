@@ -64,7 +64,8 @@ def tf_accept(x, Lx, log_px, device='cpu', our_alg=False, use_barker=False, log_
             new_log_jac = torch.where(mask, log_jac, torch.zeros_like(log_jac))
             mask = mask[:, None]
         else:
-            #for i in range(len(Lx)):
+            # # If want with constraint, un-hasttag line 68-71
+            # for i in range(len(Lx)):
             #    xes = out_of_range(Lx[i])
             #    if not xes:
             #        log_px[i] = torch.tensor(-9999, dtype=torchType, device=device)
@@ -84,7 +85,8 @@ def tf_accept(x, Lx, log_px, device='cpu', our_alg=False, use_barker=False, log_
                                               dtype=torchType))
             mask = (logprobs <= log_px[0])[:, None]
         else:
-            #for i in range(len(Lx)):
+            # # If want with constraint, un-hasttag line 89-92
+            # for i in range(len(Lx)):
             #    xes = out_of_range(Lx[i])
             #    if not xes:
             #        log_px[i] = torch.tensor(-9999, dtype=torchType, device=device)
