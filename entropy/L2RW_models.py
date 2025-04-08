@@ -350,8 +350,9 @@ class L2GradRW(nn.Module):
         
         epsi = self.epsi.exp()
         xp = x + epsi*z
-        
-        #for i in range(xp.detach().numpy().shape[0]):
+
+        # # If want with constraint, un-hasttag this line 355-357
+        # for i in range(xp.detach().numpy().shape[0]):
         #    if out_of_range(xp[i]) == False:
         #        xp[i] = x[i]
         
