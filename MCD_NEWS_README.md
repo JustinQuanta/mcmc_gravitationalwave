@@ -211,4 +211,4 @@ pip install requests
 
 ## License
 
-This module is part of the mcmc_gravitationalwave repository.
+This module is provided as part of this repository for educational and informational purposes.

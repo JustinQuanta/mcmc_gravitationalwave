@@ -65,12 +65,16 @@ class MCDNewsFetcher:
                     
                     # Filter to last 12 months
                     if time_published >= self.twelve_months_ago:
+                        summary = item.get("summary", "")
+                        if len(summary) > 200:
+                            summary = summary[:200] + "..."
+                        
                         article = {
                             "title": item.get("title", ""),
                             "url": item.get("url", ""),
                             "time_published": time_published.strftime("%Y-%m-%d %H:%M:%S"),
                             "source": item.get("source", ""),
-                            "summary": item.get("summary", "")[:200] + "...",
+                            "summary": summary,
                             "sentiment_score": item.get("overall_sentiment_score", 0),
                             "relevance_score": item.get("ticker_sentiment", [{}])[0].get("relevance_score", 0)
                                 if item.get("ticker_sentiment") else 0
@@ -123,12 +127,16 @@ class MCDNewsFetcher:
             articles = []
             for item in data:
                 timestamp = datetime.fromtimestamp(item.get("datetime", 0))
+                summary = item.get("summary", "")
+                if len(summary) > 200:
+                    summary = summary[:200] + "..."
+                
                 article = {
                     "title": item.get("headline", ""),
                     "url": item.get("url", ""),
                     "time_published": timestamp.strftime("%Y-%m-%d %H:%M:%S"),
                     "source": item.get("source", ""),
-                    "summary": item.get("summary", "")[:200] + "...",
+                    "summary": summary,
                     "image": item.get("image", "")
                 }
                 articles.append(article)
@@ -268,7 +276,7 @@ class MCDNewsFetcher:
                     pub_date = datetime.strptime(article["time_published"], "%Y-%m-%d %H:%M:%S")
                     days_ago = (self.base_date - pub_date).days
                     score = max(0, 10 - (days_ago / 36.5))  # Decay over year
-                except:
+                except (ValueError, TypeError):
                     score = 5  # Default middle score
             
             article["calculated_score"] = score

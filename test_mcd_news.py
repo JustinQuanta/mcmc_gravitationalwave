@@ -91,11 +91,15 @@ class TestMCDNewsFetcher(unittest.TestCase):
     
     def test_save_to_json(self):
         """Test JSON file saving functionality."""
+        import tempfile
+        
         articles = self.fetcher.get_sample_news()
         ranked = self.fetcher.rank_articles_by_popularity(articles)
         
-        # Save to a test file
-        test_filename = '/tmp/test_mcd_news.json'
+        # Save to a test file using tempfile for cross-platform compatibility
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as tf:
+            test_filename = tf.name
+        
         self.fetcher.save_to_json(ranked, filename=test_filename)
         
         # Verify file exists
